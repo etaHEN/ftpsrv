@@ -82,16 +82,6 @@ main() {
   int notify_user = 1;
   pid_t pid;
 
-  syscall(SYS_thr_set_name, -1, "ftpsrv.elf");
-
-  while((pid=find_pid("ftpsrv.elf")) > 0) {
-    if(kill(pid, SIGKILL)) {
-      FTP_LOG_PERROR("kill");
-      return EXIT_FAILURE;
-    }
-    sleep(1);
-  }
-
   signal(SIGPIPE, SIG_IGN);
 
   // change authid so certain character devices can be read, e.g.,
